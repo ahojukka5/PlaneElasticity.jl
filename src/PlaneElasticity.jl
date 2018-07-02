@@ -10,10 +10,10 @@ import FEMBase: get_unknown_field_name,
                 get_formulation_type,
                 assemble_elements!
 
-type PlaneStress <: FieldProblem
+mutable struct PlaneStress <: FieldProblem
 end
 
-type PlaneStrain <: FieldProblem
+mutable struct PlaneStrain <: FieldProblem
 end
 
 function get_unknown_field_name(::Problem{PlaneStress})
@@ -24,8 +24,8 @@ function get_unknown_field_name(::Problem{PlaneStrain})
     return "displacement"
 end
 
-function assemble_elements!{B}(::Problem{PlaneStress}, ::Assembly,
-                               elements::Vector{Element{B}}, ::Float64)
+function assemble_elements!(::Problem{PlaneStress}, ::Assembly,
+                            elements::Vector{Element{B}}, ::Float64) where B
 
     for element in elements
         info("Not doing anything useful right now.")
@@ -33,8 +33,8 @@ function assemble_elements!{B}(::Problem{PlaneStress}, ::Assembly,
 
 end
 
-function assemble_elements!{B}(::Problem{PlaneStrain}, ::Assembly,
-                               elements::Vector{Element{B}}, ::Float64)
+function assemble_elements!(::Problem{PlaneStrain}, ::Assembly,
+                            elements::Vector{Element{B}}, ::Float64) where B
 
     for element in elements
         info("Not doing anything useful right now.")
